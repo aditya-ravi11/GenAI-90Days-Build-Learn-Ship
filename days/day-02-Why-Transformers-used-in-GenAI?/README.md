@@ -1,39 +1,35 @@
-# Day {{DAY}} — {{TITLE}}
+# Day 02 — Why Transformers for GenAI (NN types + backprop recap)
 
-## Objectives
-- [ ] Primary: {{PRIMARY_OBJECTIVE}}
-- [ ] Secondary: {{SECONDARY_OBJECTIVE}}
+> Folder: `days/day-02-why-transformers-used-in-genai/`
 
-## TL;DR
-- {{POINT_1}}
-- {{POINT_2}}
-- {{POINT_3}}
+## What I set out to do
+- Recap how neural networks learn via backprop and why activations/architectures matter.
+- Survey major neural network types and their strengths/limits.
+- Explain why attention/Transformers are a good fit for modern GenAI workloads.
 
-## Concepts & Intuition
-Briefly explain the intuition. Include 1 diagram and 1 key formula.
+---
 
-```mermaid
-graph TD
-Q[Query] --> DotProd[Dot product with Keys]
-DotProd --> Scale[Scale by sqrt(d_k)]
-Scale --> Softmax[Softmax]
-Softmax --> Weights[Attention Weights]
-Weights --> Sum[Weighted sum of Values]
-```
 
-### Key Formula
-\[ \text{{Attention}}(Q,K,V) = \text{{softmax}}\left( \frac{{QK^\top}}{{\sqrt{{d_k}}}} \right) V \]
 
-## Mini-Experiment
-- Run: `python tiny_demo.py`
-- What this shows: {{WHAT_IT_SHOWS}}
+## WHAT I verified today (tiny proofs)
 
-## Notes & Claims
-- Claim 1: {{CLAIM_1}}  
-- Evidence: {{EVIDENCE_1}}
+**V1 — Backprop lowers loss in a tiny MLP**
+- Train a 2-layer MLP on XOR; one or more steps of SGD/Adam **reduce BCE loss**.
 
-## Open Questions
-- {{QUESTION_1}}
+**V2 — Vanishing vs stable gradients (sigmoid vs ReLU)**
+- Measure per-layer gradient norms in deep stacks:
+  - Sigmoid stacks shrink gradients more (vanishing).
+  - ReLU stacks keep healthier gradient magnitudes.
 
-## References
-- {{REF_1}}
+**V3 — Toy attention**
+- Compute scaled dot-product attention on 3 tokens; see weights concentrate on relevant keys.
+
+**Final Code Output:**
+![alt text](image.png)
+---
+
+## How to run
+```bash
+cd days/day-02-why-transformers-used-in-genai
+python tiny_demo_day2_min.py
+
